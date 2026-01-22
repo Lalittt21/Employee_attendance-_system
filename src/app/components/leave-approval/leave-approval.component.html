@@ -1,0 +1,84 @@
+<div class="approval-container">
+  <div class="page-header">
+    <h1>Leave Approval</h1>
+    <p class="subtitle">Manage and approve leave requests</p>
+  </div>
+
+  <div class="stats-section">
+    <div class="stat-card">
+      <h4>Pending</h4>
+      <p class="stat-value">{{ getPendingCount() }}</p>
+    </div>
+    <div class="stat-card">
+      <h4>Approved</h4>
+      <p class="stat-value">{{ getApprovedCount() }}</p>
+    </div>
+    <div class="stat-card">
+      <h4>Rejected</h4>
+      <p class="stat-value">{{ getRejectedCount() }}</p>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <label for="filterStatus">Filter by Status:</label>
+    <select id="filterStatus" [(ngModel)]="filterStatus" (change)="onFilterChange()" name="filterStatus">
+      <option value="all">All Requests</option>
+      <option value="pending">Pending</option>
+      <option value="approved">Approved</option>
+      <option value="rejected">Rejected</option>
+    </select>
+  </div>
+
+  <div class="table-section">
+    <table class="approval-table" *ngIf="pendingLeaveRequests.length > 0">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Leave Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of pendingLeaveRequests" class="request-row">
+          <td>{{ request.employeeName }}</td>
+          <td>{{ request.leaveType }}</td>
+          <td>{{ request.startDate }}</td>
+          <td>{{ request.endDate }}</td>
+          <td>{{ request.reason }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="request.status | lowercase">
+              {{ request.status }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <button 
+              *ngIf="request.status === 'Pending'" 
+              class="action-btn approve-btn" 
+              (click)="approveLeave(request.id)"
+              title="Approve"
+            >
+              ✅ Approve
+            </button>
+            <button 
+              *ngIf="request.status === 'Pending'" 
+              class="action-btn reject-btn" 
+              (click)="rejectLeave(request.id)"
+              title="Reject"
+            >
+              ❌ Reject
+            </button>
+            <span *ngIf="request.status !== 'Pending'" class="no-action">—</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="pendingLeaveRequests.length === 0" class="no-data">
+      <p>No leave requests found</p>
+    </div>
+  </div>
+</div>

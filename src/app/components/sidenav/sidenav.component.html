@@ -1,0 +1,15 @@
+<div class="sidenav" [class.open]="isOpen">
+  <nav class="sidenav-menu">
+    <div class="sidenav-header">
+      <h2>Menu</h2>
+    </div>
+    <ul class="menu-list">
+      <li *ngFor="let item of menuItems">
+        <a (click)="navigateTo(item.route)" class="menu-item">
+          <span class="icon">{{ item.icon }}</span>
+          <span class="label">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,9 @@
+<div class="app-wrapper">
+  <app-navbar (toggleSidenav)="onToggleSidenav()"></app-navbar>
+  <div class="app-content">
+    <app-sidenav [isOpen]="sidenavOpen"></app-sidenav>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

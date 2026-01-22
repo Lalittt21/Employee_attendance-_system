@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <button class="menu-toggle" (click)="onToggleSidenav()">
+        ☰
+      </button>
+      <span class="app-title">{{ title }}</span>
+    </div>
+    <div class="navbar-menu">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">Dashboard</a>
+      <a routerLink="/employees" routerLinkActive="active" class="nav-link">Employees</a>
+      <a routerLink="/attendance" routerLinkActive="active" class="nav-link">Attendance</a>
+      <a routerLink="/leave-request" routerLinkActive="active" class="nav-link">Leave Request</a>
+      <a routerLink="/leave-approval" routerLinkActive="active" class="nav-link">Leave Approval</a>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>

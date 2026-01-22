@@ -1,0 +1,80 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p class="subtitle">Welcome back! Here's your HR system overview</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon">👥</div>
+      <div class="metric-content">
+        <h3>Total Employees</h3>
+        <p class="metric-value">{{ totalEmployees }}</p>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon">✅</div>
+      <div class="metric-content">
+        <h3>Present Today</h3>
+        <p class="metric-value">{{ todayPresentCount }}</p>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon">❌</div>
+      <div class="metric-content">
+        <h3>Absent Today</h3>
+        <p class="metric-value">{{ todayAbsentCount }}</p>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon">⏳</div>
+      <div class="metric-content">
+        <h3>Pending Leave Requests</h3>
+        <p class="metric-value">{{ pendingLeaveRequests }}</p>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon">✔️</div>
+      <div class="metric-content">
+        <h3>Approved Leaves</h3>
+        <p class="metric-value">{{ approvedLeaveRequests }}</p>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon">📊</div>
+      <div class="metric-content">
+        <h3>Attendance Rate</h3>
+        <p class="metric-value">
+          {{ todayPresentCount > 0 ? ((todayPresentCount / (todayPresentCount + todayAbsentCount)) * 100 | number: '1.0-0') : 0 }}%
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="action-buttons">
+      <button class="action-btn" routerLink="/employees">
+        <span class="btn-icon">👥</span>
+        View Employees
+      </button>
+      <button class="action-btn" routerLink="/attendance">
+        <span class="btn-icon">📋</span>
+        Mark Attendance
+      </button>
+      <button class="action-btn" routerLink="/leave-request">
+        <span class="btn-icon">✉️</span>
+        Apply Leave
+      </button>
+      <button class="action-btn" routerLink="/leave-approval">
+        <span class="btn-icon">✅</span>
+        Approve Leaves
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="attendance-container">
+  <div class="page-header">
+    <h1>Attendance Tracker</h1>
+  </div>
+
+  <div class="form-section">
+    <div class="form-card">
+      <h2>Mark Attendance</h2>
+      <form class="attendance-form">
+        <div class="form-group">
+          <label for="employee">Select Employee:</label>
+          <select id="employee" [(ngModel)]="selectedEmployeeId" name="employee">
+            <option value="">-- Choose an employee --</option>
+            <option *ngFor="let emp of employees" [value]="emp.id">
+              {{ emp.name }} ({{ emp.department }})
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input 
+            id="date" 
+            type="date" 
+            [(ngModel)]="selectedDate" 
+            name="date"
+            (change)="onDateChange()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Status:</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input 
+                type="radio" 
+                name="status" 
+                value="Present" 
+                [(ngModel)]="selectedStatus"
+              />
+              <span>✅ Present</span>
+            </label>
+            <label class="radio-label">
+              <input 
+                type="radio" 
+                name="status" 
+                value="Absent" 
+                [(ngModel)]="selectedStatus"
+              />
+              <span>❌ Absent</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" (click)="markAttendance()">
+            Mark Attendance
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="records-section" *ngIf="todayAttendance.length > 0">
+    <h2>Today's Attendance ({{ selectedDate }})</h2>
+    <div class="attendance-summary">
+      <div class="summary-stat">
+        <span class="label">Total Present:</span>
+        <span class="value">{{ todayAttendance | filter: 'Present' }}</span>
+      </div>
+      <div class="summary-stat">
+        <span class="label">Total Absent:</span>
+        <span class="value">{{ todayAttendance | filter: 'Absent' }}</span>
+      </div>
+    </div>
+
+    <table class="attendance-table">
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of todayAttendance" class="attendance-row">
+          <td>{{ record.employeeName }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="record.status === 'Present' ? 'present' : 'absent'">
+              {{ record.status }}
+            </span>
+          </td>
+          <td>{{ record.date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="all-records-section">
+    <h2>All Attendance Records</h2>
+    <table class="attendance-table" *ngIf="attendanceRecords.length > 0">
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of attendanceRecords" class="attendance-row">
+          <td>{{ record.employeeName }}</td>
+          <td>{{ record.date }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="record.status === 'Present' ? 'present' : 'absent'">
+              {{ record.status }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="attendanceRecords.length === 0" class="no-data">
+      No attendance records found
+    </div>
+  </div>
+</div>
