@@ -201,13 +201,6 @@ ng build --configuration production
 - [ ] Leave balance tracking
 - [ ] Export to Excel/PDF
 
-## License
-
-MIT License
-
-## Author
-
-Developed with ❤️ for HR Management
 
 ## Tech Stack
 - **Framework**: Angular 17+
